@@ -10,7 +10,7 @@ import java.util.Date;
 
 import static androidx.room.ForeignKey.CASCADE;
 
-@Entity(tableName = "point_table", foreignKeys = @ForeignKey(entity = Route.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
+@Entity(tableName = "point_table", foreignKeys = @ForeignKey(entity = Routes.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
 public class Points {
 
     @PrimaryKey(autoGenerate = true)
