@@ -22,13 +22,16 @@ public interface PointsDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertPoint(Points points);
-
+/*
     // Updates via GoogleMaps API
     @Update
     LiveData<List<Points>> setLongitudeLatitude(double longitude, double latitude);
-
+*/
     // For View Routes, show static routes from point A - B
-    @Query("SELECT * FROM point_table ORDER BY id ASC")
-    List<Points> getPoints(Points points);
+    @Query("SELECT * FROM point_table WHERE route_id = :id ORDER BY id ASC")
+    List<Points> getAllPoints(int id);
+
+    @Query("SELECT * FROM point_table ORDER BY route_id ASC")
+    LiveData<List<Points>> displayPoints();
 
 }

@@ -29,9 +29,9 @@ public class Points {
     private double latitude;
 
     @ColumnInfo(name = "date")
-    private Date date;
+    private String date;
 
-    public Points(int routeId, double longitude, double latitude, Date date ) {
+    public Points(int routeId, double longitude, double latitude, String date) {
         this.routeId = routeId;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -39,9 +39,9 @@ public class Points {
     }
 
     @NonNull
-    public int getPointId() { return id; }
+    public int getId() { return id; }
 
-    public void setPointId(@NonNull int id) { this.id = id; }
+    public void setId(@NonNull int id) { this.id = id; }
 
     @NonNull
     public int getRouteId() { return routeId; }
@@ -56,7 +56,7 @@ public class Points {
 
     public void setLatitude(double latitude) { this.latitude = latitude; }
 
-    public Date getDate() { return date; }
+    public String getDate() { return date; }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(String date) { this.date = date; }
 }

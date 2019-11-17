@@ -32,9 +32,9 @@ public class Routes {
     private float rating;
 
     @ColumnInfo(name = "date")
-    private Date date;
+    private String date;
 
-    public Routes(String name, String desc,float rating, Date date) {
+    public Routes(String name, String desc,float rating, String date) {
         this.name = name;
         this.desc = desc;
         this.rating = rating;
@@ -65,19 +65,19 @@ public class Routes {
         this.desc = desc;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public float getRate() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRate(float rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 }

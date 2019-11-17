@@ -20,6 +20,7 @@ public class DBRepository {
 
     // Points
     private PointsDAO pointsDAO;
+    private LiveData<List<Points>> allPoints;
 
     DBRepository(Application application){
         RoomDatabase roomDatabase = RoomDatabase.getDatabase(application);
@@ -28,11 +29,15 @@ public class DBRepository {
         allRoutes = routesDAO.displayRoutes();
 
         pointsDAO = roomDatabase.pointsDAO();
+        allPoints = pointsDAO.displayPoints();
     }
 
     // When route has been modified (name, description), LiveDate will notify the observer that the data has changed
     LiveData<List<Routes>> getAllRoutes(){
         return allRoutes;
+    }
+    LiveData<List<Points>> getAllPoints(){
+        return allPoints;
     }
 
     // ExecutorService manages terimnation and methods
@@ -64,23 +69,23 @@ public class DBRepository {
         });
         return name;
     }
-
-    Date setDate(Date date){
+/*
+    Date setDate(String date){
         RoomDatabase.databaseWriteExecutor.execute(() -> {
             routesDAO.setDate(date);
         });
         return date;
     }
-
+*/
     // ---------- PointsDao Methods ----------
 
-    List<Points> getAllPoints(Points points){
+    List<Points> getAllPoints(int route_id){
         RoomDatabase.databaseWriteExecutor.execute(() -> {
-            pointsDAO.getPoints(points);
+            pointsDAO.getAllPoints(route_id);
         });
-        return pointsDAO.getPoints(points);
+        return pointsDAO.getAllPoints(route_id);
     }
-
+/*
     LiveData<List<Points>> setPoints(int lon, int lat){
 
         RoomDatabase.databaseWriteExecutor.execute(() -> {
@@ -88,4 +93,5 @@ public class DBRepository {
         });
         return  pointsDAO.setLongitudeLatitude(lon, lat);
     }
+*/
 }

@@ -39,8 +39,8 @@ public interface RoutesDAO {
     LiveData<List<Routes>> displayRoutes();
 
     @Query("SELECT * FROM route_table WHERE name = :name")
-    String getRoute(String name);
+    Routes getRoute(String name);
 
-    @Update
-    Date setDate(Date date);
+//    @Update
+//    void setDate(String date);
 }
