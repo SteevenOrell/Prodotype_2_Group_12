@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,54 +10,25 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
-        app:mt_speechMode="false"
-        app:mt_hint="Search a place"
-        app:mt_maxSuggestionsCount="10"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
-        android:layout_margin="16dp"
-        app:mt_navIconEnabled="true"
-        android:elevation="5dp"
-        android:outlineProvider="bounds"
-        app:mt_placeholder="Search a place"/>
-
-    <ImageView
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:translationY="-18dp"
-        android:src="@drawable/ic_placeholder"/>
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_media_play" />
 
-
-    <LinearLayout
-        android:id="@+id/footerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-
-        <Button android:id="@+id/btnSave"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Save"
-            android:layout_alignParentBottom="true" />
-
-        <Button android:id="@+id/btnShare"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Share"
-            android:layout_alignParentBottom="true" />
-
-        <Button android:id="@+id/btnBack"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Back"
-            android:layout_alignParentBottom="true" />
-
-    </LinearLayout>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

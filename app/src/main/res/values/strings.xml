@@ -6,8 +6,8 @@
     <string name="about">About</string>
     <string name="navigation">Navigation</string>
     <string name="route_history">Route History</string>
-	<!-- About -->
-	<string name="Contributors">Steeven Orell Wemin\nMuhammad Talha Sultan\nManjot Sidhu\nHristo Tsvetkov\nJason Thai\nAlec Tozak</string>
+    <!-- About -->
+    <string name="Contributors">Steeven Orell Wemin\nMuhammad Talha Sultan\nManjot Sidhu\nHristo Tsvetkov\nJason Thai\nAlec Tozak</string>
     <string name="About">My Activity Tracker is an application used to keep track of your GPS location history. This tool allows you to record routes that can later be reviewed or shared. Each route can be titled and include information such as a rating or tags. The information included will allow you to easily search through routes in the future. Whether jogging, biking, or even driving My Activity Tracker can help keep track of where you have been\n\nThis application intends to run on Android Devices with SDK versions 15 or higher.
 </string>
     <string name="AuthorsHeader">Authors:</string>

@@ -23,12 +23,17 @@ public class RouteHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_route_history);
 
         lView = findViewById(R.id.lView);
-        btnAdd = findViewById(R.id.btnAdd);
+
         btnBack = findViewById(R.id.btnBack);
 
+        //need to add here route info from database example :
+        Route r = new Route("St James","12-09-2019","-23e1312","#work",3);
+        RouteList.routeArrayList.add(r);
         MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
 
         lView.setAdapter(routeArrayAdapter);
+        routeArrayAdapter.notifyDataSetChanged();
+
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -41,20 +46,15 @@ public class RouteHistoryActivity extends AppCompatActivity {
                 String itemRouteGps = ((Route)parent.getItemAtPosition(position)).getGps();
                 String itemRouteTags = ((Route)parent.getItemAtPosition(position)).getTags();
 
-              // i.putExtra(KEY, new String[]{itemRouteN,itemRouteDate,itemRouteGps,itemRouteTags});
+                // i.putExtra(KEY, new String[]{itemRouteN,itemRouteDate,itemRouteGps,itemRouteTags});
                 i.putExtra(KEY,itemRouteN);
                 startActivity(i);
 
             }
         });
 
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(v.getContext(),AddRouteActivity.class);
-                startActivity(i);
-            }
-        });
+
+
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
