@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.List;
+import java.util.Date;
 
 // Data Access Object:
 //  -Validates your SQL at compile-time and associates it with a method.
@@ -28,15 +29,18 @@ public interface RoutesDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Routes route);
 
-    @Query("DELETE FROM route_table WHERE route_id = :id")
-    void deleteRoute(int id);
+    @Delete
+    void deleteRoute(Routes routes);
 
-    @Query("UPDATE route_table SET name = :name, description = :desc  WHERE route_id = :id")
-    void editRoute(int id, String name, String desc);
+    @Update
+    void editRoute(Routes routes);
 
     @Query("SELECT * FROM route_table ORDER BY route_id ASC")
     LiveData<List<Routes>> displayRoutes();
 
-    @Query("SELECT route_id FROM route_table WHERE date = :date")
-    void setDate(String date);
+    @Query("SELECT * FROM route_table WHERE name = :name")
+    String getRoute(String name);
+
+    @Update
+    Date setDate(Date date);
 }
