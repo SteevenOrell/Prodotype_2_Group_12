@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ public class MyArrayAdapter extends ArrayAdapter<Route> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if(convertView == null){
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(layout,null);
@@ -33,12 +34,26 @@ public class MyArrayAdapter extends ArrayAdapter<Route> {
         TextView txtDate = convertView.findViewById(R.id.txtDate);
         TextView txtgps = convertView.findViewById(R.id.txtGps);
         TextView txtTags = convertView.findViewById(R.id.txtTags);
+        TextView txtRate = convertView.findViewById(R.id.txtRate);
+        ImageButton image = convertView.findViewById(R.id.imBtnDel);
+        image.setTag(position);
 
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Route rou = RouteList.routeArrayList.get(position);
+                RouteList.routeArrayList.remove(rou);
+                //it should remove from DB here too
+                notifyDataSetChanged();
+            }
+        });
+
+        String rateString = String.valueOf(getItem(position).getRate());
         txtName.setText(getItem(position).getRname());
         txtDate.setText(getItem(position).getDate());
         txtgps.setText(getItem(position).getGps());
         txtTags.setText(getItem(position).getTags());
-
+        txtRate.setText(rateString+"/5");
 
         return convertView;
     }
