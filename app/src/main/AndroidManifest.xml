@@ -29,7 +29,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".About" />
-        <activity android:name=".AddRouteActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".Nav1Activity" />
         <activity android:name=".RouteHistoryActivity" />
