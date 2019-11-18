@@ -29,17 +29,20 @@ public interface RoutesDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Routes route);
 
-    @Delete
-    void deleteRoute(Routes routes);
+    @Query("SELECT * FROM route_table WHERE name = :name")
+        Routes getRoute(String name);
 
     @Update
     void editRoute(Routes routes);
 
+    @Query("DELETE FROM route_table")
+    void deleteAll();
+
     @Query("SELECT * FROM route_table ORDER BY route_id ASC")
     LiveData<List<Routes>> displayRoutes();
 
-    @Query("SELECT * FROM route_table WHERE name = :name")
-    Routes getRoute(String name);
+    @Query("DELETE FROM route_table WHERE name = :name")
+    void deleteRoute(String name);
 
 //    @Update
 //    void setDate(String date);

@@ -1,10 +1,11 @@
 package com.example.prototype_1_group_12;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RouteList {
 
-    public static ArrayList<Routes> routeArrayList = new ArrayList<>();
+    public static List<Routes> routeArrayList = new ArrayList<>();
 
     public static void addRoute(Routes r){
 
