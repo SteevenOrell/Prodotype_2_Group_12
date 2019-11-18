@@ -53,7 +53,7 @@ public class DBRepository {
 
     void delete(Routes routes){
         RoomDatabase.databaseWriteExecutor.execute(() -> {
-            routesDAO.deleteRoute(routes.getName());
+            routesDAO.deleteRoute(routes);
         });
     }
 

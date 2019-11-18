@@ -1,6 +1,7 @@
 package com.example.prototype_1_group_12;
 
 import android.content.Context;
+
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,7 @@ public abstract class RoomDatabase extends androidx.room.RoomDatabase {
     // A singleton To prevent having multiple instances of the db
     private static volatile RoomDatabase INSTANCE;
     private static final int THREADS = 4;
-
+  
     private static androidx.room.RoomDatabase.Callback callback =
             new androidx.room.RoomDatabase.Callback(){
 
@@ -51,10 +52,7 @@ public abstract class RoomDatabase extends androidx.room.RoomDatabase {
             return null;
         }
     }
-
-
-
-
+  
     // To run db operations tasks asynchronously
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(THREADS);
 
@@ -66,15 +64,10 @@ public abstract class RoomDatabase extends androidx.room.RoomDatabase {
             synchronized (RoomDatabase.class){
                 if(INSTANCE == null){
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(), RoomDatabase.class, "rp_database").addCallback(callback).build();
+
                 }
             }
         }
         return INSTANCE;
     }
-
-
-
-
-
-
 }
