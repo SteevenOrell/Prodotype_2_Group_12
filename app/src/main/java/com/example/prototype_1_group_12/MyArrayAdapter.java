@@ -13,10 +13,10 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class MyArrayAdapter extends ArrayAdapter<Route> {
+public class MyArrayAdapter extends ArrayAdapter<Routes> {
 
     private int layout;
-    public MyArrayAdapter(@NonNull Context context, int resource, @NonNull List<Route> objects) {
+    public MyArrayAdapter(@NonNull Context context, int resource, @NonNull List<Routes> objects) {
         super(context, resource, objects);
         layout = resource;
     }
@@ -32,8 +32,8 @@ public class MyArrayAdapter extends ArrayAdapter<Route> {
         }
         TextView txtName = convertView.findViewById(R.id.txtRouteName);
         TextView txtDate = convertView.findViewById(R.id.txtDate);
-        TextView txtgps = convertView.findViewById(R.id.txtGps);
-        TextView txtTags = convertView.findViewById(R.id.txtTags);
+        TextView txtDesc = convertView.findViewById(R.id.txtDescription);
+
         TextView txtRate = convertView.findViewById(R.id.txtRate);
         ImageButton image = convertView.findViewById(R.id.imBtnDel);
         image.setTag(position);
@@ -41,18 +41,18 @@ public class MyArrayAdapter extends ArrayAdapter<Route> {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Route rou = RouteList.routeArrayList.get(position);
+                Routes rou = RouteList.routeArrayList.get(position);
                 RouteList.routeArrayList.remove(rou);
                 //it should remove from DB here too
                 notifyDataSetChanged();
             }
         });
 
-        String rateString = String.valueOf(getItem(position).getRate());
-        txtName.setText(getItem(position).getRname());
+        String rateString = String.valueOf(getItem(position).getRating());
+        txtName.setText(getItem(position).getName());
         txtDate.setText(getItem(position).getDate());
-        txtgps.setText(getItem(position).getGps());
-        txtTags.setText(getItem(position).getTags());
+        txtDesc.setText(getItem(position).getDesc());
+
         txtRate.setText(rateString+"/5");
 
         return convertView;

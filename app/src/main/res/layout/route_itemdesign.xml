@@ -21,18 +21,11 @@
         android:text="Date" />
 
     <TextView
-        android:id="@+id/txtGps"
+        android:id="@+id/txtDescription"
         android:layout_width="97dp"
         android:layout_height="56dp"
         android:layout_weight="1"
-        android:text="GPS route" />
-
-    <TextView
-        android:id="@+id/txtTags"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_weight="1"
-        android:text="Tags" />
+        android:text="Description" />
 
     <TextView
         android:id="@+id/txtRate"

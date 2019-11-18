@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class RouteList {
 
-    public static ArrayList<Route> routeArrayList = new ArrayList<>();
+    public static ArrayList<Routes> routeArrayList = new ArrayList<>();
 
-    public static void addRoute(Route r){
+    public static void addRoute(Routes r){
 
         routeArrayList.add(r);
 
     }
 
-    public static void removeRoute(Route r){
+    public static void removeRoute(Routes r){
 
         routeArrayList.remove(r);
     }
