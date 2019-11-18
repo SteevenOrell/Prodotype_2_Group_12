@@ -21,18 +21,11 @@
         android:text="Date" />
 
     <TextView
-        android:id="@+id/txtGps"
+        android:id="@+id/txtDescription"
         android:layout_width="97dp"
         android:layout_height="56dp"
         android:layout_weight="1"
-        android:text="GPS route" />
-
-    <TextView
-        android:id="@+id/txtTags"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_weight="1"
-        android:text="Tags" />
+        android:text="Description" />
 
     <TextView
         android:id="@+id/txtRate"
@@ -44,9 +37,9 @@
     <ImageButton
         android:id="@+id/imBtnDel"
         android:layout_width="66dp"
-        android:layout_height="wrap_content"
-        android:focusable="false"
+        android:layout_height="62dp"
         android:layout_weight="1"
+        android:focusable="false"
         app:srcCompat="@android:drawable/ic_menu_delete" />
 
 </LinearLayout>
