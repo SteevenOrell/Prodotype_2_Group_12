@@ -23,7 +23,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
 //Routes r = new Routes("St James","12-09-2019",3,"12-7-276");
 //RouteList.routeArrayList.add(r);
 
-    private RouteViewModel routeViewModel;
+   static public RouteViewModel routeViewModel;
     public static final String KEY= "KEY";
     ListView lView;
     Button btnBack;
