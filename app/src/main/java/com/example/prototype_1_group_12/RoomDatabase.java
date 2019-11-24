@@ -43,7 +43,7 @@ public abstract class RoomDatabase extends androidx.room.RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            dao.deleteAll();
+            // dao.deleteAll();
             dao.insert(new Routes("CasaLoma","Work",3,"12-05-2019"));
             dao.insert(new Routes("StJames","Work",3,"12-05-2019"));
             dao.insert(new Routes("Shallowford Road","relax",5,"07-03-2019"));
