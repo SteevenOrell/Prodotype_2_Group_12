@@ -5,8 +5,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,6 +43,7 @@ public class Nav1Activity extends FragmentActivity implements
     private Marker locationMarker;
     private static final int RequestUserLocation = 99;
     private int count = 0;
+    private TextView txtCoords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,15 +58,20 @@ public class Nav1Activity extends FragmentActivity implements
         mapFragment.getMapAsync(this);
 
         final FloatingActionButton btnStartStop = findViewById(R.id.fab);
+        txtCoords = findViewById(R.id.textCoords);
+
+        txtCoords.setText("Press play to print Lat, Long");
 
         btnStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (count == 0) {
                     count++;
+                    startTracking();
                     Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
                 } else {
                     count = 0;
+                    stopTracking();
                     Toast.makeText(Nav1Activity.this, "Stopped tracking!", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -138,6 +144,9 @@ public class Nav1Activity extends FragmentActivity implements
             locationMarker.remove();
         }
 
+        if (count == 1)
+            sendCoords(location.getLatitude(), location.getLongitude());
+
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions marker = new MarkerOptions();
         marker.position(latLng);
@@ -147,7 +156,7 @@ public class Nav1Activity extends FragmentActivity implements
         locationMarker = mMap.addMarker(marker);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomBy(16));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(13));
 
         if (googleApiClient != null){
             LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
@@ -157,12 +166,24 @@ public class Nav1Activity extends FragmentActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1100);
-        locationRequest.setFastestInterval(1100);
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
+    }
+
+    public void startTracking(){
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this::onLocationChanged);
+    }
+
+    public void stopTracking(){
+        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this::onLocationChanged);
+    }
+
+    private void sendCoords(Double lat, Double lon) {
+        txtCoords.append("\n " + lon + ", " + lat);
     }
 
     @Override
