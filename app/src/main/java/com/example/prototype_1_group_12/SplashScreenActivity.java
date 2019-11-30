@@ -23,12 +23,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                 .withFullScreen()
                 .withTargetActivity(MainActivity.class)
                 .withSplashTimeOut(3000)    // live of splash screen (miliseconds) --> 3 secs
-                .withBackgroundColor(Color.parseColor("#298c1c"))       // Green background
+                .withBackgroundColor(Color.parseColor("#ffffff"))       // Green background
                 .withAfterLogoText("Position Tracker")
                 .withLogo(R.drawable.logo);
 
         // Change text colour
-        config.getAfterLogoTextView().setTextColor(Color.GREEN);
+        config.getAfterLogoTextView().setTextColor(Color.RED);
 
         // Create splash screen with above settings and set layout
         View easySplashScreen = config.create();

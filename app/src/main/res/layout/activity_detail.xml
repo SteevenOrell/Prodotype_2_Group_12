@@ -5,44 +5,44 @@
     android:id="@+id/txt_rate"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
     tools:context=".DetailActivity">
 
 
     <TextView
         android:id="@+id/txtRate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_width="94dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="24dp"
         android:text="Rating"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="287dp" />
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_backDet"
         android:layout_width="190dp"
         android:layout_height="52dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginRight="48dp"
         android:layout_marginBottom="16dp"
         android:background="@android:color/background_dark"
         android:text="Back"
         android:textColor="@android:color/background_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.584"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="409dp"
         android:layout_height="83dp"
-        android:layout_marginStart="2dp"
-        android:layout_marginLeft="2dp"
-        android:background="#030E0C"
+        android:background="#FF0000"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,11 +52,12 @@
         android:id="@+id/imageView2"
         android:layout_width="60dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="@+id/toolbar"
-        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.536"
         app:srcCompat="@android:drawable/ic_dialog_map" />
 
 
@@ -64,39 +65,46 @@
         android:id="@+id/txt_routeDetails"
         android:layout_width="295dp"
         android:layout_height="56dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="36dp"
         android:text="Details about the route  ............................................ "
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtV_route" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/txtRate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_tracker"
-        android:layout_width="196dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="280dp"
+        android:layout_height="48dp"
         android:fontFamily="sans-serif-black"
-        android:text="My Position Tracker"
+        android:text="rate our app"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textColorLink="#00FCF5F5"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.648"
+        app:layout_constraintStart_toStartOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="62dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="122dp"
-        android:layout_marginLeft="122dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="42dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginRight="108dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_backDet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.35"
         app:srcCompat="@android:drawable/ic_menu_share" />
 
     <TextView
         android:id="@+id/txtV_route"
-
         android:layout_width="254dp"
         android:layout_height="19dp"
         android:layout_marginStart="4dp"
@@ -105,29 +113,36 @@
         android:background="#A5BABA"
         android:fontFamily="sans-serif-black"
         android:text="NAME"
-        android:textSize="14sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/txt_routeDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.429"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintVertical_bias="0.753" />
 
     <ImageView
         android:id="@+id/imageView9"
-        android:layout_width="66dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginLeft="38dp"
-        android:layout_marginBottom="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="44dp"
+        android:layout_height="41dp"
+        android:background="#2B2B2B"
+        app:layout_constraintBottom_toTopOf="@+id/btn_backDet"
+        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        app:layout_constraintHorizontal_bias="0.642"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+        app:layout_constraintVertical_bias="0.613"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginBottom="244dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="240dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_backDet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
