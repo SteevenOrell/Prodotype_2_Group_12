@@ -21,18 +21,18 @@
         android:text="Date" />
 
     <TextView
-        android:id="@+id/txtGps"
+        android:id="@+id/txtDescription"
         android:layout_width="97dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="GPS route" />
+        android:text="Description" />
 
     <TextView
-        android:id="@+id/txtTags"
+        android:id="@+id/txtRate"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Tags" />
+        android:text="Rate" />
 
     <ImageButton
         android:id="@+id/imBtnDel"

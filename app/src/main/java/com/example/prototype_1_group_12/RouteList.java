@@ -1,18 +1,19 @@
 package com.example.prototype_1_group_12;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RouteList {
 
-    public static ArrayList<Route> routeArrayList = new ArrayList<>();
+    public static List<Routes> routeArrayList = new ArrayList<>();
 
-    public static void addRoute(Route r){
+    public static void addRoute(Routes r){
 
         routeArrayList.add(r);
 
     }
 
-    public static void removeRoute(Route r){
+    public static void removeRoute(Routes r){
 
         routeArrayList.remove(r);
     }
