@@ -107,7 +107,7 @@
         android:layout_marginBottom="68dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/txtConsign"
+        app:layout_constraintBottom_toBottomOf="@+id/txtError"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
@@ -201,7 +201,7 @@
         app:layout_constraintVertical_bias="0.702" />
 
     <TextView
-        android:id="@+id/txtConsign"
+        android:id="@+id/txtError"
         android:layout_width="226dp"
         android:layout_height="38dp"
         android:layout_marginBottom="152dp"
