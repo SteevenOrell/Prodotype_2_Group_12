@@ -10,7 +10,7 @@ import java.util.List;
 
 public class RouteViewModel extends AndroidViewModel {
 
-    private DBRepository mRepository;
+    public DBRepository mRepository;
 
     private LiveData<List<Routes>> mAllRoutes;
     public RouteViewModel (Application application){
