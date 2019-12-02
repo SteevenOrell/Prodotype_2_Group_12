@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.List;
 
 public class RouteHistoryActivity extends AppCompatActivity {
@@ -26,7 +28,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
    static public RouteViewModel routeViewModel;
     public static final String KEY= "KEY";
     ListView lView;
-    Button btnBack;
+    FloatingActionButton fabBack;
     // ImageButton btnDel;
 
     @Override
@@ -36,7 +38,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
 
         lView = findViewById(R.id.lView);
 
-        btnBack = findViewById(R.id.btnBack);
+        fabBack = findViewById(R.id.fabBack);
         final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
 
         lView.setAdapter(routeArrayAdapter);
@@ -50,7 +52,6 @@ public class RouteHistoryActivity extends AppCompatActivity {
                    RouteList.routeArrayList = route;
                    final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(getApplicationContext(),R.layout.route_itemdesign, RouteList.routeArrayList);
                    lView.setAdapter(routeArrayAdapter);
-
                }
 
                // lView.setAdapter(routeArrayAdapter);
@@ -79,10 +80,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
             }
         });
 
-
-
-
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        fabBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

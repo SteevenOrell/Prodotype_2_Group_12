@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#25FAF7F7"
@@ -11,35 +12,41 @@
         android:layout_width="104dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Route name" />
+        android:text="Route name"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/txtDate"
-        android:layout_width="69dp"
-        android:layout_height="40dp"
+        android:layout_width="43dp"
+        android:layout_height="39dp"
         android:layout_weight="1"
-        android:text="Date" />
+        android:text="Date"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/txtDescription"
-        android:layout_width="97dp"
+        android:layout_width="59dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Description" />
+        android:text="Description"
+        android:textSize="12sp" />
 
     <TextView
         android:id="@+id/txtRate"
-        android:layout_width="wrap_content"
+        android:layout_width="59dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:text="Rate" />
+        android:text="Rate"
+        android:textSize="12sp" />
 
     <ImageButton
         android:id="@+id/imBtnDel"
         android:layout_width="66dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:focusable="false"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        android:focusable="auto"
+        android:foreground="@android:drawable/ic_delete"
+         />
+
 
 </LinearLayout>

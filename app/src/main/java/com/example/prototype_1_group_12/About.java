@@ -6,18 +6,20 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class About extends AppCompatActivity {
 
-    protected Button btnReturn;
+    protected FloatingActionButton fabBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
-        btnReturn = findViewById(R.id.button);
+        fabBack = findViewById(R.id.fabBack);
 
-        btnReturn.setOnClickListener(new View.OnClickListener() {
+        fabBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
