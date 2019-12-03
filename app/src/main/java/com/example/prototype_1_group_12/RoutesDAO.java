@@ -45,7 +45,7 @@ public interface RoutesDAO {
     LiveData<List<Routes>> displayRoutes();
 
     @Query("SELECT *, route_id FROM route_table WHERE name = :name")
-    Routes getRouteId(String name);
+    LiveData<List<Routes>> getRouteId(String name);
     //List<Routes> getRouteId(String name);
 
 }

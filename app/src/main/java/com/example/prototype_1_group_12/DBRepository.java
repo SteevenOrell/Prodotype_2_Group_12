@@ -23,9 +23,6 @@ public class DBRepository {
     private PointsDAO pointsDAO;
     private LiveData<List<Points>> allPoints;
 
-    //Routes id
-    private Routes routesId;
-
 
     DBRepository(Application application){
         RoomDatabase roomDatabase = RoomDatabase.getDatabase(application);
@@ -69,20 +66,9 @@ public class DBRepository {
         });
     }
 
-//    String getRoute(String name){
-//        RoomDatabase.databaseWriteExecutor.execute(() -> {
-//            routesDAO.getRoute(name);
-//        });
-//        return name;
-//    }
-
-    // to get route by name
-    Routes getRouteId(String name){
-        RoomDatabase.databaseWriteExecutor.execute(() -> {
-            routesId = routesDAO.getRouteId(name);
-            //Log.d("getting route: ", Integer.toString(routesId));
-        });
-        return routesId;
+    // Get route by providing name.
+    public LiveData<List<Routes>> getRouteId(String name){
+        return routesDAO.getRouteId(name);
     }
 /*
     Date setDate(String date){
