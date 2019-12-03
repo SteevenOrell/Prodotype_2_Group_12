@@ -19,12 +19,10 @@ public class DetailActivity extends AppCompatActivity {
         String routeInfo = getIntent().getExtras().getString(RouteHistoryActivity.KEY);
         t.setText(routeInfo);
 
-
         btnBackDetail = findViewById(R.id.btn_backDet);
         btnBackDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
