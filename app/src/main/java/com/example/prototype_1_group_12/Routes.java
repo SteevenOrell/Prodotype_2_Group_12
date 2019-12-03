@@ -20,7 +20,7 @@ public class Routes {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "route_id")  // Allows specific customization about the column
-    private int route_id;
+    private int routeId;
 
     @ColumnInfo(name = "name")
     private String name;
@@ -42,11 +42,11 @@ public class Routes {
     }
 
     public int getRouteId() {
-        return route_id;
+        return routeId;
     }
 
-    public void setRouteId(int route_id) {
-        this.route_id = route_id;
+    public void setRouteId(int routeId) {
+        this.routeId = routeId;
     }
 
     public String getName() {
