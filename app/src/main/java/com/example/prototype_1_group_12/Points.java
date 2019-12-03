@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey;
 
 import static androidx.room.ForeignKey.CASCADE;
 // , indices = {@Index("route_id")}
-@Entity(tableName = "point_table", foreignKeys = @ForeignKey(entity = Routes.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
+@Entity(tableName = "point_table",
+        foreignKeys = @ForeignKey(entity = Routes.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
 public class Points {
 
     @PrimaryKey(autoGenerate = true)

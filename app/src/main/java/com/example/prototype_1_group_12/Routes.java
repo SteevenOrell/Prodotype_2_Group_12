@@ -25,7 +25,7 @@ public class Routes {
     @ColumnInfo(name = "name")
     private String name;
 
-    @ColumnInfo(name = "description")
+    @ColumnInfo(name = "desc")
     private String desc;
 
     @ColumnInfo(name = "rating")

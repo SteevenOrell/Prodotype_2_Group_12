@@ -3,6 +3,7 @@ package com.example.prototype_1_group_12;
 // not sure about number of repos - https://stackoverflow.com/questions/53922862/single-on-multiple-dao-and-repository-in-android-room-database-project/53939077
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -22,6 +23,7 @@ public class DBRepository {
     private PointsDAO pointsDAO;
     private LiveData<List<Points>> allPoints;
 
+
     DBRepository(Application application){
         RoomDatabase roomDatabase = RoomDatabase.getDatabase(application);
 
@@ -30,6 +32,7 @@ public class DBRepository {
 
         pointsDAO = roomDatabase.pointsDAO();
         allPoints = pointsDAO.displayPoints();
+
     }
 
     // When route has been modified (name, description), LiveDate will notify the observer that the data has changed
@@ -63,11 +66,9 @@ public class DBRepository {
         });
     }
 
-    String getRoute(String name){
-        RoomDatabase.databaseWriteExecutor.execute(() -> {
-            routesDAO.getRoute(name);
-        });
-        return name;
+    // Get route by providing name.
+    public LiveData<Routes> getRoute(String name){
+        return routesDAO.getRoute(name);
     }
 /*
     Date setDate(String date){
@@ -84,6 +85,12 @@ public class DBRepository {
             pointsDAO.getAllPoints(route_id);
         });
         return pointsDAO.getAllPoints(route_id);
+    }
+
+    void insertPoint(Points points){
+        RoomDatabase.databaseWriteExecutor.execute(() -> {
+            pointsDAO.insertPoint(points);
+        });
     }
 /*
     LiveData<List<Points>> setPoints(int lon, int lat){

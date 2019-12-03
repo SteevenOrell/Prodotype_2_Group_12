@@ -1,19 +1,26 @@
 package com.example.prototype_1_group_12;
 
 import android.Manifest;
+import android.app.Application;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
@@ -30,6 +37,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 public class Nav1Activity extends FragmentActivity implements
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -44,15 +57,21 @@ public class Nav1Activity extends FragmentActivity implements
     private static final int RequestUserLocation = 99;
     private int count = 0;
     private TextView txtCoords;
+    private int currRouteId;
+    public LiveData<Routes> route;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav1);
 
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             checkUserLocationPermission();
         }
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -67,8 +86,7 @@ public class Nav1Activity extends FragmentActivity implements
             public void onClick(View v) {
                 if (count == 0) {
                     count++;
-                    startTracking();
-                    Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
+                    openAddActivity();
                 } else {
                     count = 0;
                     stopTracking();
@@ -166,8 +184,8 @@ public class Nav1Activity extends FragmentActivity implements
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
+        locationRequest.setInterval(9000);
+        locationRequest.setFastestInterval(9000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
             LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
@@ -183,7 +201,47 @@ public class Nav1Activity extends FragmentActivity implements
     }
 
     private void sendCoords(Double lat, Double lon) {
-        txtCoords.append("\n " + lon + ", " + lat);
+        //txtCoords.append("\n " + lon + ", " + lat);
+        String date = Calendar.getInstance().getTime().toString();
+        Points p = new Points(currRouteId, lon, lat, date);
+        RouteViewModel routeViewModel = new ViewModelProvider(this).get(RouteViewModel.class);
+        routeViewModel.mRepository.insertPoint(p);
+    }
+
+    public void openAddActivity(){
+        Intent i = new Intent(this, AddRouteActivity.class);
+        startActivityForResult(i, 1);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (resultCode == 1) {
+            // Take route name string from addRoute activity.
+            String route_name = intent.getStringExtra("ROUTE_NAME");
+            // Generate date string.
+            String date = Calendar.getInstance().getTime().toString();
+            // Create route in preparation of pushing it to the database.
+            Routes r = new Routes(route_name, "", 0, date);
+            // Setting up the database repository.
+            RouteViewModel routeViewModel = new ViewModelProvider(this).get(RouteViewModel.class);
+            // Inserting Route to the database.
+            routeViewModel.insert(r);
+            // Retrieving route_id from database for route with same name as provided by the addRoute activity.
+            route = routeViewModel.getRoute(route_name);
+            // Setting variable needed for point creation.
+            route.observe(this, new Observer<Routes>() {
+                @Override
+                public void onChanged(@Nullable Routes routes) {
+                    currRouteId = routes.getRouteId();
+                }
+            });
+            // Start creating points for the current route with the currRouteId as their route_id.
+            startTracking();
+            // Toast notification.
+            Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
+        }
+        super.onActivityResult(requestCode, resultCode, intent);
     }
 
     @Override
