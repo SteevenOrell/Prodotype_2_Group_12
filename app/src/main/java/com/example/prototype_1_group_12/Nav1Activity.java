@@ -215,27 +215,24 @@ public class Nav1Activity extends FragmentActivity implements
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (resultCode == 1) {
+            // Take route name string from addRoute activity.
             String route_name = intent.getStringExtra("ROUTE_NAME");
-
+            // Generate date string.
             String date = Calendar.getInstance().getTime().toString();
-
+            // Create route in preparation of pushing it to the database.
             Routes r = new Routes(route_name, "", 0, date);
-
-            //testing with public mRepo
+            // Setting up the database repository.
             RouteViewModel routeViewModel = new ViewModelProvider(this).get(RouteViewModel.class);
+            // Inserting Route to the database.
             routeViewModel.mRepository.insert(r);
-
+            // Retrieving route_id from database for route with same name as provided by the addRoute activity.
             routeArr = routeViewModel.mRepository.getRouteId(route_name);
-
-//            String size = Integer.toString(routeArr.length);
-//
-//            Log.d("list size; ", size);
-
-
+            // Setting variable needed for point creation.
             currRouteId = routeArr.getRouteId();
+            // Start creating points for the current route with the currRouteId as their route_id.
             startTracking();
+            // Toast notification.
             Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
-
         }
         super.onActivityResult(requestCode, resultCode, intent);
     }
