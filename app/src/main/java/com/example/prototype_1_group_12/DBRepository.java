@@ -67,8 +67,8 @@ public class DBRepository {
     }
 
     // Get route by providing name.
-    public LiveData<List<Routes>> getRouteId(String name){
-        return routesDAO.getRouteId(name);
+    public LiveData<Routes> getRoute(String name){
+        return routesDAO.getRoute(name);
     }
 /*
     Date setDate(String date){

@@ -18,6 +18,8 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -56,7 +58,7 @@ public class Nav1Activity extends FragmentActivity implements
     private int count = 0;
     private TextView txtCoords;
     private int currRouteId;
-    public Routes routeArr;
+    public LiveData<Routes> route;
 
 
 
@@ -224,11 +226,16 @@ public class Nav1Activity extends FragmentActivity implements
             // Setting up the database repository.
             RouteViewModel routeViewModel = new ViewModelProvider(this).get(RouteViewModel.class);
             // Inserting Route to the database.
-            routeViewModel.mRepository.insert(r);
+            routeViewModel.insert(r);
             // Retrieving route_id from database for route with same name as provided by the addRoute activity.
-            routeArr = routeViewModel.mRepository.getRouteId(route_name);
+            route = routeViewModel.getRoute(route_name);
             // Setting variable needed for point creation.
-            currRouteId = routeArr.getRouteId();
+            route.observe(this, new Observer<Routes>() {
+                @Override
+                public void onChanged(@Nullable Routes routes) {
+                    currRouteId = routes.getRouteId();
+                }
+            });
             // Start creating points for the current route with the currRouteId as their route_id.
             startTracking();
             // Toast notification.

@@ -17,9 +17,7 @@ public class RouteViewModel extends AndroidViewModel {
         super(application);
         mRepository = new DBRepository(application);
         mAllRoutes = updateRouteList();
-
     }
-
 
     LiveData<List<Routes>> getAllRoutes(){
         if(mAllRoutes == null){
@@ -30,8 +28,11 @@ public class RouteViewModel extends AndroidViewModel {
     public LiveData<List<Routes>> updateRouteList(){
         return mRepository.getAllRoutes();
     }
-    public void insert(Routes route){ mRepository.insert(route);}
 
-    public void delete(Routes route){mRepository.delete(route);}
+    public void insert(Routes route){ mRepository.insert(route); }
+
+    public void delete(Routes route){ mRepository.delete(route); }
+
+    public LiveData<Routes> getRoute(String name){ return mRepository.getRoute(name); }
 
 }
