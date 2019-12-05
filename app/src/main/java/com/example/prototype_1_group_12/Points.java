@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 import static androidx.room.ForeignKey.CASCADE;
-
-@Entity(tableName = "point_table", foreignKeys = @ForeignKey(entity = Routes.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
+// , indices = {@Index("route_id")}
+@Entity(tableName = "point_table",
+        foreignKeys = @ForeignKey(entity = Routes.class, parentColumns = "route_id", childColumns = "route_id", onDelete = CASCADE))
 public class Points {
 
     @PrimaryKey(autoGenerate = true)

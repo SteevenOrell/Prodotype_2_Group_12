@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class DetailActivity extends AppCompatActivity {
 
-    Button btnBackDetail;
+    FloatingActionButton fabBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,12 +21,10 @@ public class DetailActivity extends AppCompatActivity {
         String routeInfo = getIntent().getExtras().getString(RouteHistoryActivity.KEY);
         t.setText(routeInfo);
 
-
-        btnBackDetail = findViewById(R.id.btn_backDet);
-        btnBackDetail.setOnClickListener(new View.OnClickListener() {
+        fabBack = findViewById(R.id.fabBack);
+        fabBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 finish();
             }
         });
