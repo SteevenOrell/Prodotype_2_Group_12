@@ -18,9 +18,6 @@ import java.util.List;
 
 public class MyArrayAdapter extends ArrayAdapter<Routes> {
 
-    private RoutesDAO dao;
-    private RoomDatabase db;
-  //  private RouteViewModel rvm;
 
     private int layout;
     public MyArrayAdapter(@NonNull Context context, int resource, @NonNull List<Routes> objects) {
@@ -50,7 +47,7 @@ public class MyArrayAdapter extends ArrayAdapter<Routes> {
             public void onClick(View v) {
                 Routes rou = RouteList.routeArrayList.get(position);
                 RouteList.routeArrayList.remove(rou);
-                RouteHistoryActivity.routeViewModel.delete(rou);
+                //RouteHistoryActivity.routeViewModel.delete(rou);
                 notifyDataSetChanged();
             }
         });
