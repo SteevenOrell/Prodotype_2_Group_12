@@ -36,53 +36,55 @@ public class DBHelper {
 
     }
 
-   public static long addRoute(RouteHelper rout,String name,String description,double rating,String date){
+    public static long addRoute(RouteHelper rout,String name,String description,double rating,String date){
 
         SQLiteDatabase db = rout.getWritableDatabase();
-       ContentValues cv = new ContentValues();
-       cv.put(RouteContract.RouteEntity.COLUMN_NAME_ROUTE_NAME,name);
-       cv.put(RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION,description);
-       cv.put(RouteContract.RouteEntity.COLUMN_NAME_RATING,rating);
-       cv.put(RouteContract.RouteEntity.COLUMN_NAME_DATE,date);
-       return db.insert(RouteContract.RouteEntity.TABLE_NAME,null,cv);
-   }
+        ContentValues cv = new ContentValues();
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_ROUTE_NAME,name);
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION,description);
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_RATING,rating);
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_DATE,date);
+        return db.insert(RouteContract.RouteEntity.TABLE_NAME,null,cv);
 
-   public static long deleteRoute(RouteHelper rou, String name){
-       SQLiteDatabase db = rou.getWritableDatabase();
-       String whereClause = " route_name=? ";
-       String[]whereArgs = new String[]{name};
+    }
 
-       return db.delete(RouteContract.RouteEntity.TABLE_NAME,whereClause,whereArgs);
+    public static long deleteRoute(RouteHelper rou, String name){
 
-   }
+        SQLiteDatabase db = rou.getWritableDatabase();
+        String whereClause = " route_name=? ";
+        String[]whereArgs = new String[]{name};
 
-   //you can get Id of the route by typing the routename
-public static Cursor getRouteRow(RouteHelper routeHelper, String routename){
+        return db.delete(RouteContract.RouteEntity.TABLE_NAME,whereClause,whereArgs);
 
-    SQLiteDatabase db = routeHelper.getReadableDatabase();
+    }
 
-    String [] projection = {
-            RouteContract.RouteEntity._ID,
-            RouteContract.RouteEntity.COLUMN_NAME_ROUTE_NAME,
-            RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION,
-            RouteContract.RouteEntity.COLUMN_NAME_RATING,
-            RouteContract.RouteEntity.COLUMN_NAME_DATE,
-    };
-    String selection = " route_name=? ";
-    String[] selectionArgs = {routename}; //or new String[]{routename}
-    return db.query(
-            RouteContract.RouteEntity.TABLE_NAME,
-            projection,
-            selection,
-            selectionArgs,
-            null,
-            null,
-            null
-    );
+    //you can get Id of the route by typing the routename
+    public static Cursor getRouteRow(RouteHelper routeHelper, String routename){
+
+        SQLiteDatabase db = routeHelper.getReadableDatabase();
+
+        String [] projection = {
+                RouteContract.RouteEntity._ID,
+                RouteContract.RouteEntity.COLUMN_NAME_ROUTE_NAME,
+                RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION,
+                RouteContract.RouteEntity.COLUMN_NAME_RATING,
+                RouteContract.RouteEntity.COLUMN_NAME_DATE,
+        };
+        String selection = " route_name=? ";
+        String[] selectionArgs = {routename}; //or new String[]{routename}
+        return db.query(
+                RouteContract.RouteEntity.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
 
 
 
-}
+    }
 
 //-------------------------------------Methods for points--------------------------------------------------
 
@@ -108,6 +110,18 @@ public static Cursor getRouteRow(RouteHelper routeHelper, String routename){
                 null,
                 null
         );
+
+    }
+
+    public static long addPoint(PointHelper pointHelper, int route_id, double lon, double lat, String date){
+
+         SQLiteDatabase db = pointHelper.getWritableDatabase();
+         ContentValues cv = new ContentValues();
+         cv.put(PointContract.PointEntity.COLUMN_NAME_ROUTE_ID,route_id);
+         cv.put(PointContract.PointEntity.COLUMN_NAME_LONG,lon);
+         cv.put(PointContract.PointEntity.COLUMN_NAME_LAT,lat);
+         cv.put(PointContract.PointEntity.COLUMN_NAME_DATE,date);
+         return db.insert(PointContract.PointEntity.TABLE_NAME,null,cv);
 
     }
 

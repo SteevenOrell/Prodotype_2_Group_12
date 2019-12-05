@@ -21,7 +21,6 @@ import java.util.List;
 
 public class RouteHistoryActivity extends AppCompatActivity {
 
-    static public RouteViewModel routeViewModel;
     public static final String KEY= "KEY";
     ListView lView;
     FloatingActionButton fabBack;

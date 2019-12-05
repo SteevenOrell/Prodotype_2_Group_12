@@ -47,6 +47,7 @@ public class AddRouteActivity extends AppCompatActivity {
                     long id = DBHelper.addRoute(rHelper,route_name,desc_str,rate_double,date_str);
                     intent.putExtra("ROUTE_NAME", route_name);
                     setResult(STATUS_OK , intent);
+                    rHelper.close();
                     finish();
                 }
                 else{

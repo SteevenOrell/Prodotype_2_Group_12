@@ -16,7 +16,7 @@ public final class PointContract {
         public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " ( "
                 + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_ROUTE_ID + " INTEGER, "
                 + COLUMN_NAME_LONG + " REAL, " + COLUMN_NAME_LAT + " REAL, " + COLUMN_NAME_DATE + " TEXT)";
-
+// FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ADD RELATIONSHIP TO OTHER DATABASE.
 
         public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
