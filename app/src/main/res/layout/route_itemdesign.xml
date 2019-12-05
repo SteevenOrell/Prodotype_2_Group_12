@@ -24,7 +24,7 @@
         android:textSize="12sp" />
 
     <TextView
-        android:id="@+id/txtDescription"
+        android:id="@+id/txtView11"
         android:layout_width="59dp"
         android:layout_height="40dp"
         android:layout_weight="1"

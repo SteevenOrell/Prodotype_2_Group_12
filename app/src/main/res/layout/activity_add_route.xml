@@ -8,7 +8,7 @@
     tools:context=".AddRouteActivity">
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/txtView11"
         android:layout_width="62dp"
         android:layout_height="37dp"
         android:layout_marginStart="7dp"
@@ -16,9 +16,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="52dp"
-        android:text="GPS route"
+        android:text="Description"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
-        app:layout_constraintEnd_toStartOf="@+id/editTxtGPS"
+        app:layout_constraintEnd_toStartOf="@+id/editTxtDesc"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -31,9 +31,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginRight="12dp"
         android:layout_marginBottom="220dp"
-        android:text="Tags"
+        android:text="Ratings"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/editTxtTags"
+        app:layout_constraintEnd_toStartOf="@+id/editTxtRatings"
         app:layout_constraintHorizontal_bias="0.378"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTxtTags"
+        android:id="@+id/editTxtRatings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
@@ -111,7 +111,7 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
-        android:id="@+id/editTxtGPS"
+        android:id="@+id/editTxtDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
@@ -119,7 +119,7 @@
         android:layout_marginBottom="36dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtTags"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtRatings"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <EditText
@@ -131,7 +131,7 @@
         android:layout_marginBottom="64dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTxtGPS"
+        app:layout_constraintBottom_toTopOf="@+id/editTxtDesc"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
