@@ -35,7 +35,6 @@ public class RouteHistoryActivity extends AppCompatActivity {
         fabBack = findViewById(R.id.fabBack);
         final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
 
-        final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
         lView.setAdapter(routeArrayAdapter);
 
         // Setup database controller.
