@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -63,6 +66,9 @@ public class Nav1Activity extends FragmentActivity implements
     private RouteHelper rHelper = null;
     private PointHelper pHelper = null;
     private FloatingActionButton fabBack;
+
+    private double previousLat = 200.0;
+    private double previousLong = 200.0;
 
 
     @Override
@@ -263,14 +269,39 @@ public class Nav1Activity extends FragmentActivity implements
     }
 
     private void sendCoords(Double lat, Double lon) {
-        txtCoords.append("\n " + lon + ", " + lat);
-        pHelper = new PointHelper(this);
-        pHelper.getWritableDatabase();
+        if (previousLat == 200.0 && previousLong == 200.0)
+        {
+            previousLat = lat;
+            previousLong = lon;
+            pHelper = new PointHelper(this);
+            pHelper.getWritableDatabase();
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+            String date = sdf.format(new Date());
+            DBHelper.addPoint(pHelper, currRouteId, lon, lat, date);
+            pHelper.close();
+        }
+        else{
+            Polyline line = mGoogleMap.addPolyline(new PolylineOptions()
+                    .add(new LatLng(previousLat, previousLong), new LatLng(lat, lon))
+                    .width(5)
+                    .color(Color.RED));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
-        String date = sdf.format(new Date());
 
-        DBHelper.addPoint(pHelper, currRouteId, lon, lat, date);
+            pHelper = new PointHelper(this);
+            pHelper.getWritableDatabase();
+
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+            String date = sdf.format(new Date());
+
+            DBHelper.addPoint(pHelper, currRouteId, lon, lat, date);
+
+            previousLat = lat;
+            previousLong = lon;
+            pHelper.close();
+
+        }
+        //txtCoords.append("\n " + lon + ", " + lat);
+
     }
 
     public void openAddActivity(){

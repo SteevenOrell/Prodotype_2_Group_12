@@ -3,11 +3,15 @@ package com.example.prototype_1_group_12;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddRouteActivity extends AppCompatActivity {
 
@@ -25,9 +29,6 @@ public class AddRouteActivity extends AppCompatActivity {
 
         saveBtn = findViewById(R.id.btnSave);
         routeName = findViewById(R.id.editTxtRouteName);
-        EditText desc = findViewById(R.id.editTxtDesc);
-        EditText rate = findViewById(R.id.editTxtRatings);
-        EditText date = findViewById(R.id.editTxtDate);
         errorMsg = findViewById(R.id.txtError);
         rHelper = new RouteHelper(this);
         rHelper.getWritableDatabase();
@@ -37,21 +38,21 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String route_name = routeName.getText().toString();
-                String desc_str = desc.getText().toString();
-                String rate_str = rate.getText().toString();
-                String date_str = date.getText().toString();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/M/yyyy");
+                String date = sdf.format(new Date());
 
                 if (route_name != null && !route_name.isEmpty()){
                     Intent intent = new Intent();
-                    double rate_double = Double.valueOf(rate_str);
-                    long id = DBHelper.addRoute(rHelper,route_name,desc_str,rate_double,date_str);
+                    long id = DBHelper.addRoute(rHelper,route_name,null,0,date);
                     intent.putExtra("ROUTE_NAME", route_name);
                     setResult(STATUS_OK , intent);
                     rHelper.close();
                     finish();
                 }
                 else{
-                   errorMsg.setText("Please fill in all values");
+                   errorMsg.setText("Please provide a route name.");
+                   errorMsg.setTextColor(Color.RED);
                 }
             }
         });
