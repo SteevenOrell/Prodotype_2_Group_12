@@ -56,7 +56,6 @@ public class Nav1Activity extends FragmentActivity implements
     private ConnectionResult connectionResult;
 
     private int count = 0;
-    private TextView txtCoords;
     private int currRouteId;
     private RouteHelper rHelper = null;
     private PointHelper pHelper = null;
@@ -83,9 +82,7 @@ public class Nav1Activity extends FragmentActivity implements
         mapFrag.getMapAsync(this);
 
         btnStartStop = findViewById(R.id.fab);
-        txtCoords = findViewById(R.id.textCoords);
 
-        txtCoords.setText("Press play to print Lat, Long");
 
         btnStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,6 +92,7 @@ public class Nav1Activity extends FragmentActivity implements
                 }else{
                     stopTracking();
                     Toast.makeText(Nav1Activity.this, "Stop tracking!", Toast.LENGTH_SHORT).show();
+                    mGoogleMap.clear();
                     REQUEST_CODE = 0;
                     btnStartStop.setImageResource(R.drawable.ic_start);
                 }
@@ -180,7 +178,7 @@ public class Nav1Activity extends FragmentActivity implements
             mCurrLocationMarker.remove();
         }
 
-        if (count == 1)
+        if (REQUEST_CODE == 1)
             sendCoords(location.getLatitude(), location.getLongitude());
 
         //Place current location marker
