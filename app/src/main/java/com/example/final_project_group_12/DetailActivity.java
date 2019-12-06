@@ -1,9 +1,12 @@
 package com.example.final_project_group_12;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +29,10 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private PointHelper pHelper = null;
     private RouteHelper rHelper = null;
+    private RouteHelper rHelperEdit = null;
+    private FloatingActionButton fabSave;
+    private TextView route_details;
+    private RatingBar ratingBar;
     private double bLat;
     private double bLong;
     private double lat;
@@ -46,18 +53,48 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        TextView t = findViewById(R.id.txtV_route);
+        TextView routeT = findViewById(R.id.txtV_route);
         String routeInfo = getIntent().getExtras().getString(RouteHistoryActivity.KEY);
-        t.setText(routeInfo);
+        fabSave = findViewById(R.id.fabSave);
+        route_details = findViewById(R.id.txt_routeDetails);
+        ratingBar = findViewById(R.id.ratingBar);
+        routeT.setText(routeInfo);
+
+
+
 
         rHelper = new RouteHelper(this);
         rHelper.getReadableDatabase();
+
+        rHelperEdit = new RouteHelper(this);
+        rHelperEdit.getWritableDatabase();
 
         Cursor cur = DBHelper.getRouteRow(rHelper, routeInfo);
         cur.moveToNext();
         routeId = cur.getInt(cur.getColumnIndexOrThrow(RouteContract.RouteEntity._ID));
 
         rHelper.close();
+
+        fabSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String route_str = routeT.getText().toString();
+                String detail_str = route_details.getText().toString();
+                double rating_double = ratingBar.getRating();
+                Log.d("RATING ::"," this is :" + rating_double);
+                if(route_str.length()>0 && detail_str.length()>0 && rating_double>=0 && rating_double<=5){
+
+                     DBHelper.editRouteRating(rHelperEdit,route_str,detail_str,rating_double);
+                     RouteHistoryActivity.routeArrayAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(v.getContext(),RouteHistoryActivity.class);
+                    rHelperEdit.close();
+                    startActivity(i);
+                }
+
+
+            }
+        });
 
         fabBack = findViewById(R.id.fabBack);
         fabBack.setOnClickListener(new View.OnClickListener() {

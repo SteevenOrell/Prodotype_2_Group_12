@@ -16,6 +16,7 @@ import java.util.List;
 public class MyArrayAdapter extends ArrayAdapter<Routes> {
 
     private int layout;
+    private RouteHelper deleteHelper = null;
     public MyArrayAdapter(@NonNull Context context, int resource, @NonNull List<Routes> objects) {
         super(context, resource, objects);
         layout = resource;
@@ -43,6 +44,8 @@ public class MyArrayAdapter extends ArrayAdapter<Routes> {
             public void onClick(View v) {
                 Routes rou = RouteList.routeArrayList.get(position);
                 RouteList.routeArrayList.remove(rou);
+                DBHelper.deleteRoute(RouteHistoryActivity.delHelper,rou.getName());
+                RouteHistoryActivity.delHelper.close();
                 //RouteHistoryActivity.routeViewModel.delete(rou);
                 notifyDataSetChanged();
             }
