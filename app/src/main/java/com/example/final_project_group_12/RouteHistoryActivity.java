@@ -17,6 +17,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
     ListView lView;
     FloatingActionButton fabBack;
     private RouteHelper rHelper = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +29,9 @@ public class RouteHistoryActivity extends AppCompatActivity {
 
         rHelper = new RouteHelper(this);
         rHelper.getReadableDatabase();
+
+        RouteList.routeArrayList.clear();
+
         Cursor cursor = DBHelper.getAllRoutes(rHelper);
 
 
@@ -37,9 +41,9 @@ public class RouteHistoryActivity extends AppCompatActivity {
             float rating = cursor.getFloat(cursor.getColumnIndexOrThrow(RouteContract.RouteEntity.COLUMN_NAME_RATING)); //float can be a problem
             String date = cursor.getString(cursor.getColumnIndexOrThrow(RouteContract.RouteEntity.COLUMN_NAME_DATE));
 
-              Routes r = new Routes(name,description,rating,date);
+            Routes r = new Routes(name,description,rating,date);
 
-           RouteList.addRoute(r);
+            RouteList.addRoute(r);
         }
         final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
 
