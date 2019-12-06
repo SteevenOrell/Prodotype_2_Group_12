@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddRouteActivity extends AppCompatActivity {
 
-    private Button saveBtn;
+    private FloatingActionButton saveBtn;
+    private FloatingActionButton backBtn;
     private TextView routeName;
     private TextView errorMsg;
     public static int STATUS_OK = 1;
@@ -27,6 +28,7 @@ public class AddRouteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_route);
 
         saveBtn = findViewById(R.id.btnSave);
+        backBtn = findViewById(R.id.btnBack);
         routeName = findViewById(R.id.editTxtRouteName);
         errorMsg = findViewById(R.id.txtError);
         rHelper = new RouteHelper(this);
@@ -53,6 +55,13 @@ public class AddRouteActivity extends AppCompatActivity {
                    errorMsg.setText("Please provide a route name.");
                    errorMsg.setTextColor(Color.RED);
                 }
+            }
+        });
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //implement back button
             }
         });
 
