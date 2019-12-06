@@ -3,6 +3,7 @@ package com.example.final_project_group_12;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 
 public class DBHelper {
 
@@ -167,4 +168,20 @@ public class DBHelper {
 
     }
 
+
+    public static void DeleteAll( RouteHelper r, PointHelper p){
+
+ SQLiteDatabase db = r.getWritableDatabase();
+ SQLiteDatabase db2 = p.getWritableDatabase();
+
+ db.execSQL(RouteContract.RouteEntity.SQL_DROP);
+ db.execSQL(RouteContract.RouteEntity.SQL_CREATE);
+
+ db2.execSQL(PointContract.PointEntity.SQL_DROP);
+ db2.execSQL(PointContract.PointEntity.SQL_CREATE);
+
+
+
+
+    }
 }

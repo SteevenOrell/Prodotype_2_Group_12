@@ -14,9 +14,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class RouteHistoryActivity extends AppCompatActivity {
 
     public static final String KEY= "KEY";
+   static MyArrayAdapter routeArrayAdapter;
     ListView lView;
     FloatingActionButton fabBack;
     private RouteHelper rHelper = null;
+    public static RouteHelper delHelper = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,9 @@ public class RouteHistoryActivity extends AppCompatActivity {
 
         rHelper = new RouteHelper(this);
         rHelper.getReadableDatabase();
+
+        delHelper = new RouteHelper(this);
+        delHelper.getWritableDatabase();
 
         RouteList.routeArrayList.clear();
 
@@ -45,7 +50,7 @@ public class RouteHistoryActivity extends AppCompatActivity {
 
             RouteList.addRoute(r);
         }
-        final  MyArrayAdapter routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
+         routeArrayAdapter = new MyArrayAdapter(this,R.layout.route_itemdesign,RouteList.routeArrayList);
 
 
         lView.setAdapter(routeArrayAdapter);

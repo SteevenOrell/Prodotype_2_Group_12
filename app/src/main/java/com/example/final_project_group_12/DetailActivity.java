@@ -1,5 +1,6 @@
 package com.example.final_project_group_12;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -85,8 +86,10 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
                 if(route_str.length()>0 && detail_str.length()>0 && rating_double>=0 && rating_double<=5){
 
                      DBHelper.editRouteRating(rHelperEdit,route_str,detail_str,rating_double);
-                     finish();
-
+                     RouteHistoryActivity.routeArrayAdapter.notifyDataSetChanged();
+                    Intent i = new Intent(v.getContext(),RouteHistoryActivity.class);
+                    rHelperEdit.close();
+                    startActivity(i);
                 }
 
 
