@@ -44,8 +44,6 @@ public class AddRouteActivity extends AppCompatActivity {
                 String date = sdf.format(new Date());
 
                 if (route_name != null && !route_name.isEmpty()){
-
-
                     Intent intent = new Intent();
                     long id = DBHelper.addRoute(rHelper,route_name,null,0,date);
                     intent.putExtra("ROUTE_NAME", route_name);
@@ -64,6 +62,7 @@ public class AddRouteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //implement back button
+                finish();
             }
         });
 
