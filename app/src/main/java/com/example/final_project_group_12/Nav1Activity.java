@@ -65,6 +65,8 @@ public class Nav1Activity extends FragmentActivity implements
     private double previousLat = 200.0;
     private double previousLong = 200.0;
 
+    private int REQUEST_CODE = 0;
+    FloatingActionButton btnStartStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class Nav1Activity extends FragmentActivity implements
         mapFrag = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFrag.getMapAsync(this);
 
-        final FloatingActionButton btnStartStop = findViewById(R.id.fab);
+        btnStartStop = findViewById(R.id.fab);
         txtCoords = findViewById(R.id.textCoords);
 
         txtCoords.setText("Press play to print Lat, Long");
@@ -85,14 +87,7 @@ public class Nav1Activity extends FragmentActivity implements
         btnStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (count == 0) {
-                    count++;
-                    openAddActivity();
-                } else {
-                    count = 0;
-                    stopTracking();
-                    Toast.makeText(Nav1Activity.this, "Stopped tracking!", Toast.LENGTH_SHORT).show();
-                }
+                openAddActivity();
             }
         });
 
@@ -307,7 +302,9 @@ public class Nav1Activity extends FragmentActivity implements
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        REQUEST_CODE = resultCode;
         if (resultCode == 1) {
+            btnStartStop.setImageResource(R.drawable.ic_stop);
             String route = intent.getStringExtra("ROUTE_NAME");
             Cursor cur = DBHelper.getRouteRow(rHelper, route);
             cur.moveToNext();
@@ -317,6 +314,16 @@ public class Nav1Activity extends FragmentActivity implements
             startTracking();
             // Toast notification.
             Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            btnStartStop.setImageResource(R.drawable.ic_start);
+            btnStartStop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    stopTracking();
+                    Toast.makeText(Nav1Activity.this, "Stop tracking!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         super.onActivityResult(requestCode, resultCode, intent);
     }
