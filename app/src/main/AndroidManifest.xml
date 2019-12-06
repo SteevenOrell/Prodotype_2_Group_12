@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.prototype_1_group_12">
+    package="com.example.final_project_group_12">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddRouteActivity"></activity>
+        <activity android:name="com.example.final_project_group_12.AddRouteActivity"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -21,9 +21,9 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".MainActivity" /> <!-- Start with splash screen -->
+        <activity android:name="com.example.final_project_group_12.MainActivity" /> <!-- Start with splash screen -->
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.example.final_project_group_12.SplashScreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,10 +31,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".About" />
-        <activity android:name=".DetailActivity" />
-        <activity android:name=".Nav1Activity" />
-        <activity android:name=".RouteHistoryActivity" />
+        <activity android:name="com.example.final_project_group_12.About" />
+        <activity android:name="com.example.final_project_group_12.DetailActivity" />
+        <activity android:name="com.example.final_project_group_12.Nav1Activity" />
+        <activity android:name="com.example.final_project_group_12.RouteHistoryActivity" />
     </application>
 
 </manifest>
