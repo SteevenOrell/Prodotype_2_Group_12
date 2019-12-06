@@ -1,4 +1,4 @@
-package com.example.prototype_1_group_12;
+package com.example.final_project_group_12;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -16,14 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.location.LocationListener;
@@ -43,7 +39,6 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Nav1Activity extends FragmentActivity implements

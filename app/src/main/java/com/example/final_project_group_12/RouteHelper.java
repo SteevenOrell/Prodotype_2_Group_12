@@ -1,11 +1,9 @@
-package com.example.prototype_1_group_12;
+package com.example.final_project_group_12;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import androidx.annotation.Nullable;
 
 public class RouteHelper extends SQLiteOpenHelper {
 

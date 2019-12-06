@@ -1,8 +1,7 @@
-package com.example.prototype_1_group_12;
+package com.example.final_project_group_12;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 

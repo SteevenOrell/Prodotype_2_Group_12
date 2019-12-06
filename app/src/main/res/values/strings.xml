@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Prototype_1_Group_12</string>
+    <string name="app_name">GROUP12_Position_Tracker</string>
 
     <string name="title_activity_test">testActivity</string>
     <string name="position_tracker">Position Tracker</string>
