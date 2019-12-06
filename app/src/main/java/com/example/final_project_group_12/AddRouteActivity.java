@@ -2,6 +2,7 @@ package com.example.final_project_group_12;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,7 +20,6 @@ public class AddRouteActivity extends AppCompatActivity {
     private TextView routeName;
     private TextView errorMsg;
     public static int STATUS_OK = 1;
-    public static int STATUS_NO = 0;
     private RouteHelper rHelper = null;
 
     @Override
@@ -61,7 +61,8 @@ public class AddRouteActivity extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //implement back button
+                Intent intent = new Intent();
+                setResult(Activity.RESULT_CANCELED , intent);
                 finish();
             }
         });

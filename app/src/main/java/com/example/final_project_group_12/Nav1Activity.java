@@ -65,13 +65,16 @@ public class Nav1Activity extends FragmentActivity implements
     private double previousLat = 200.0;
     private double previousLong = 200.0;
 
-    private int REQUEST_CODE = 0;
+    // private int OLD_REQUEST_CODE;
+    private int REQUEST_CODE;
     FloatingActionButton btnStartStop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav1);
+
+        REQUEST_CODE = 0;
 
         rHelper = new RouteHelper(this);
         rHelper.getReadableDatabase();
@@ -87,7 +90,14 @@ public class Nav1Activity extends FragmentActivity implements
         btnStartStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openAddActivity();
+                if(REQUEST_CODE == 0){
+                    openAddActivity();
+                }else{
+                    stopTracking();
+                    Toast.makeText(Nav1Activity.this, "Stop tracking!", Toast.LENGTH_SHORT).show();
+                    REQUEST_CODE = 0;
+                    btnStartStop.setImageResource(R.drawable.ic_start);
+                }
             }
         });
 
@@ -302,29 +312,26 @@ public class Nav1Activity extends FragmentActivity implements
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        // OLD_REQUEST_CODE = REQUEST_CODE;
         REQUEST_CODE = resultCode;
+
+
+
+        // Provided a route name.
         if (resultCode == 1) {
             btnStartStop.setImageResource(R.drawable.ic_stop);
             String route = intent.getStringExtra("ROUTE_NAME");
             Cursor cur = DBHelper.getRouteRow(rHelper, route);
             cur.moveToNext();
             currRouteId = cur.getInt(cur.getColumnIndexOrThrow(RouteContract.RouteEntity._ID));
-            Log.d("ROUTE ID::::", Integer.toString(currRouteId));
-            // Start creating points for the current route with the currRouteId as their route_id.
-            startTracking();
-            // Toast notification.
             Toast.makeText(Nav1Activity.this, "Started tracking!", Toast.LENGTH_SHORT).show();
+            startTracking();
         }
-        else{
+        // Didn't provide a route name.
+        else {
             btnStartStop.setImageResource(R.drawable.ic_start);
-            btnStartStop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    stopTracking();
-                    Toast.makeText(Nav1Activity.this, "Stop tracking!", Toast.LENGTH_SHORT).show();
-                }
-            });
         }
+
         super.onActivityResult(requestCode, resultCode, intent);
     }
 
