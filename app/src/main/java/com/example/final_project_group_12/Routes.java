@@ -1,14 +1,9 @@
-package com.example.prototype_1_group_12;
+package com.example.final_project_group_12;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
-import java.util.Date;
-
-import static androidx.room.ForeignKey.CASCADE;
 
 // One to many relationship
 //  -Define its relationship to Routes
