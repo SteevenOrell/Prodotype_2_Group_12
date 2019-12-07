@@ -24,7 +24,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="24dp"
         android:gravity="center"
         android:text="@string/About"
         android:textSize="18sp"
@@ -41,13 +41,14 @@
         android:layout_marginLeft="153dp"
         android:layout_marginEnd="159dp"
         android:layout_marginRight="159dp"
-        android:layout_marginBottom="53dp"
+        android:layout_marginBottom="92dp"
         android:gravity="center"
         android:text="Version: 3.0"
         android:textSize="18sp"
         app:fontFamily="sans-serif-black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -58,7 +59,7 @@
         android:layout_marginLeft="81dp"
         android:layout_marginEnd="81dp"
         android:layout_marginRight="81dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/AboutHeader"
         android:textSize="24sp"
         app:fontFamily="sans-serif-black"
@@ -73,13 +74,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
         android:layout_marginLeft="158dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="159dp"
         android:layout_marginRight="159dp"
         android:text="@string/AuthorsHeader"
         android:textSize="24sp"
         app:fontFamily="sans-serif-black"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,6 +101,19 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/btnDelAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Clear All FROM DATABASE"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

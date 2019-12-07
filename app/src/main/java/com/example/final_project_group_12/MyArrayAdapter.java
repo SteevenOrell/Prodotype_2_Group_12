@@ -1,6 +1,5 @@
-package com.example.prototype_1_group_12;
+package com.example.final_project_group_12;
 
-import android.app.Application;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,18 +10,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 
 import java.util.List;
 
 public class MyArrayAdapter extends ArrayAdapter<Routes> {
 
-    private RoutesDAO dao;
-    private RoomDatabase db;
-  //  private RouteViewModel rvm;
-
     private int layout;
+    private RouteHelper deleteHelper = null;
     public MyArrayAdapter(@NonNull Context context, int resource, @NonNull List<Routes> objects) {
         super(context, resource, objects);
         layout = resource;
@@ -39,7 +33,7 @@ public class MyArrayAdapter extends ArrayAdapter<Routes> {
 
         TextView txtName = convertView.findViewById(R.id.txtRouteName);
         TextView txtDate = convertView.findViewById(R.id.txtDate);
-        TextView txtDesc = convertView.findViewById(R.id.txtDescription);
+        TextView txtDesc = convertView.findViewById(R.id.txtView11);
         TextView txtRate = convertView.findViewById(R.id.txtRate);
         ImageButton image = convertView.findViewById(R.id.imBtnDel);
         image.setTag(position);
@@ -50,7 +44,9 @@ public class MyArrayAdapter extends ArrayAdapter<Routes> {
             public void onClick(View v) {
                 Routes rou = RouteList.routeArrayList.get(position);
                 RouteList.routeArrayList.remove(rou);
-                RouteHistoryActivity.routeViewModel.delete(rou);
+                DBHelper.deleteRoute(RouteHistoryActivity.delHelper,rou.getName());
+                RouteHistoryActivity.delHelper.close();
+                //RouteHistoryActivity.routeViewModel.delete(rou);
                 notifyDataSetChanged();
             }
         });
