@@ -10,12 +10,14 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -68,10 +70,15 @@ public class Nav1Activity extends FragmentActivity implements
     private int REQUEST_CODE;
     FloatingActionButton btnStartStop;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nav1);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            checkLocationPermission();
+        }
 
         REQUEST_CODE = 0;
 
@@ -137,6 +144,9 @@ public class Nav1Activity extends FragmentActivity implements
             } else {
                 //Request Location Permission
                 checkLocationPermission();
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_LOCATION );
             }
         }
         else {
@@ -219,10 +229,6 @@ public class Nav1Activity extends FragmentActivity implements
                         .show();
 
 
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION );
             }
         }
     }

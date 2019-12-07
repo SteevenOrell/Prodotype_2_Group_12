@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -45,13 +48,18 @@ public class AddRouteActivity extends AppCompatActivity {
 
                 if (route_name != null && !route_name.isEmpty()){
 
-
-                    Intent intent = new Intent();
-                    long id = DBHelper.addRoute(rHelper,route_name,null,0,date);
-                    intent.putExtra("ROUTE_NAME", route_name);
-                    setResult(STATUS_OK , intent);
-                    rHelper.close();
-                    finish();
+                    Cursor cur = DBHelper.getRouteRow(rHelper, route_name);
+                    if (cur.moveToNext()){
+                        errorMsg.setText("The route name already exists.");
+                        errorMsg.setTextColor(Color.RED);
+                    }else{
+                        Intent intent = new Intent();
+                        long id = DBHelper.addRoute(rHelper,route_name,null,0,date);
+                        intent.putExtra("ROUTE_NAME", route_name);
+                        setResult(STATUS_OK , intent);
+                        rHelper.close();
+                        finish();
+                    }
                 }
                 else{
                    errorMsg.setText("Please provide a route name.");

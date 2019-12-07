@@ -2,10 +2,15 @@ package com.example.final_project_group_12;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -22,6 +27,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class DetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -43,6 +55,8 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
     GoogleMap mGoogleMap;
     SupportMapFragment mapFrag;
 
+    ImageButton btnShare;
+
     Marker mCurrLocationMarker;
 
     @Override
@@ -54,14 +68,15 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         mapFrag.getMapAsync(this);
 
         TextView routeT = findViewById(R.id.txtV_route);
+        routeT.setEnabled(false);
+
+        btnShare = findViewById(R.id.btnShare);
+
         String routeInfo = getIntent().getExtras().getString(RouteHistoryActivity.KEY);
         fabSave = findViewById(R.id.fabSave);
         route_details = findViewById(R.id.txt_routeDetails);
         ratingBar = findViewById(R.id.ratingBar);
         routeT.setText(routeInfo);
-
-
-
 
         rHelper = new RouteHelper(this);
         rHelper.getReadableDatabase();
@@ -73,7 +88,23 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         cur.moveToNext();
         routeId = cur.getInt(cur.getColumnIndexOrThrow(RouteContract.RouteEntity._ID));
 
+        route_details.setText(cur.getString(cur.getColumnIndexOrThrow(RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION)));
+
+        ratingBar.setRating(cur.getFloat(cur.getColumnIndexOrThrow(RouteContract.RouteEntity.COLUMN_NAME_RATING)));
+
         rHelper.close();
+
+        btnShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    CaptureMapScreen();
+                } catch (Exception e) {
+                    // TODO: handle exception
+                    e.printStackTrace();
+                }
+            }
+        });
 
         fabSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,7 +159,7 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         mGoogleMap.addMarker(markerOptions);
 
         //move map camera
-        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,18));
+        mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
 
         int i = 0;
 
@@ -164,4 +195,37 @@ public class DetailActivity extends AppCompatActivity implements OnMapReadyCallb
         pHelper.close();
 
     }
+
+    public void CaptureMapScreen()
+    {
+        SnapshotReadyCallback callback = new SnapshotReadyCallback() {
+            Bitmap bitmap;
+
+            @Override
+            public void onSnapshotReady(Bitmap snapshot) {
+                // TODO Auto-generated method stub
+                bitmap = snapshot;
+
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("image/jpeg");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                File f = new File(Environment.getExternalStorageDirectory() + File.separator + "temporary_file.jpg");
+                try {
+                    f.createNewFile();
+                    FileOutputStream fo = new FileOutputStream(f);
+                    fo.write(bytes.toByteArray());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                share.putExtra(Intent.EXTRA_STREAM, Uri.parse("file:///sdcard/temporary_file.jpg"));
+                startActivity(Intent.createChooser(share, "Share Image"));
+            }
+        };
+
+        mGoogleMap.snapshot(callback);
+
+
+    }
+
 }

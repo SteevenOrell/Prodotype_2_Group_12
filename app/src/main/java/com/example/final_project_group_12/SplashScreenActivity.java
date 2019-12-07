@@ -1,17 +1,18 @@
 package com.example.final_project_group_12;
 
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import gr.net.maroulis.library.EasySplashScreen;
 
 // The splash screen utilizes a dependancy located under Gradle Scripts --> build.gradle (Module: app) line 26
 // Remove the action bar when splash screen is loading through res --> values --> styles.xml line 4 to NoActionBar
 
 public class SplashScreenActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
