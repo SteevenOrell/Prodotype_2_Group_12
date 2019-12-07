@@ -13,8 +13,8 @@ public final class RouteContract {
         public static final String COLUMN_NAME_DATE = "date";
 
         public static final String SQL_CREATE = "CREATE TABLE " + TABLE_NAME + " ( "
-                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_ROUTE_NAME + " TEXT, "
-                + COLUMN_NAME_DESCRIPTION + " TEXT UNIQUE, " + COLUMN_NAME_RATING + " REAL, "
+                + _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_NAME_ROUTE_NAME + " TEXT UNIQUE, "
+                + COLUMN_NAME_DESCRIPTION + " TEXT, " + COLUMN_NAME_RATING + " REAL, "
                 + COLUMN_NAME_DATE + " TEXT)";
         public static final String SQL_DROP = "DROP TABLE IF EXISTS " + TABLE_NAME;
     }

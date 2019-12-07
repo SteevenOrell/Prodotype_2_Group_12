@@ -2,6 +2,7 @@ package com.example.final_project_group_12;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,7 +38,6 @@ public class About extends AppCompatActivity {
         btnDeleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
 
                 DBHelper.DeleteAll(rHelperAll,pHelperAll);
                 finish();

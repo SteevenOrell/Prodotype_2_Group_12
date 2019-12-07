@@ -3,6 +3,7 @@ package com.example.final_project_group_12;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.strictmode.SqliteObjectLeakedViolation;
 
 public class DBHelper {
 
@@ -11,7 +12,7 @@ public class DBHelper {
 
     public static Cursor getAllRoutes(RouteHelper routeHelper){
         //routeHelper = new RouteHelper(context);
-       // routeHelper.getReadableDatabase();
+        // routeHelper.getReadableDatabase();
         SQLiteDatabase db = routeHelper.getReadableDatabase();
 
         String [] projection = {
@@ -47,6 +48,20 @@ public class DBHelper {
 
     }
 
+
+    public static long editRouteRating(RouteHelper rout,String name,String description,double rating){
+
+        SQLiteDatabase db = rout.getReadableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_ROUTE_NAME,name);
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_DESCRIPTION,description);
+        cv.put(RouteContract.RouteEntity.COLUMN_NAME_RATING,rating);
+
+        String whereClause = " route_name=? ";
+        String[]whereArgs = {name};
+        return db.update(RouteContract.RouteEntity.TABLE_NAME,cv,whereClause,whereArgs);
+
+    }
     public static long deleteRoute(RouteHelper rou, String name){
 
         SQLiteDatabase db = rou.getWritableDatabase();
@@ -114,13 +129,13 @@ public class DBHelper {
 
     public static long addPoint(PointHelper pointHelper, int route_id, double lon, double lat, String date){
 
-         SQLiteDatabase db = pointHelper.getWritableDatabase();
-         ContentValues cv = new ContentValues();
-         cv.put(PointContract.PointEntity.COLUMN_NAME_ROUTE_ID,route_id);
-         cv.put(PointContract.PointEntity.COLUMN_NAME_LONG,lon);
-         cv.put(PointContract.PointEntity.COLUMN_NAME_LAT,lat);
-         cv.put(PointContract.PointEntity.COLUMN_NAME_DATE,date);
-         return db.insert(PointContract.PointEntity.TABLE_NAME,null,cv);
+        SQLiteDatabase db = pointHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(PointContract.PointEntity.COLUMN_NAME_ROUTE_ID,route_id);
+        cv.put(PointContract.PointEntity.COLUMN_NAME_LONG,lon);
+        cv.put(PointContract.PointEntity.COLUMN_NAME_LAT,lat);
+        cv.put(PointContract.PointEntity.COLUMN_NAME_DATE,date);
+        return db.insert(PointContract.PointEntity.TABLE_NAME,null,cv);
 
     }
 
@@ -153,4 +168,16 @@ public class DBHelper {
 
     }
 
+
+    public static void DeleteAll( RouteHelper r, PointHelper p){
+
+        SQLiteDatabase db = r.getWritableDatabase();
+        SQLiteDatabase db2 = p.getWritableDatabase();
+
+        db.execSQL(RouteContract.RouteEntity.SQL_DROP);
+        db.execSQL(RouteContract.RouteEntity.SQL_CREATE);
+
+        db2.execSQL(PointContract.PointEntity.SQL_DROP);
+        db2.execSQL(PointContract.PointEntity.SQL_CREATE);
+    }
 }
